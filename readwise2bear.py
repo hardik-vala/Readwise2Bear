@@ -2,7 +2,7 @@ import argparse
 import requests
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--readwise_token", help="Readwise API access token")
+parser.add_argument("--readwise_token", help="Readwise API access token (in the form \"Token XXX\")")
 
 def main():
 	args = parser.parse_args()
