@@ -1,9 +1,9 @@
+"""Export highlights from Readwise to Bear."""
 import argparse
 import datetime
-import json
 import logging
-import requests
 import webbrowser
+import requests
 
 
 logging.basicConfig(
@@ -44,18 +44,18 @@ def main():
 		if args.book_id and args.book_id != book_id:
 			continue
 
-		logging.info("Importing highlights for {} (id: {})...".format(book_title, book_id))
+		logging.info("Importing highlights for %s (id: %s)..." % (book_title, book_id))
 		highlights = import_highlights(args.readwise_token, args.book_id)
 		for highlight in highlights:
 			highlight_date = get_highlight_date(highlight)
 			if args.from_date and highlight_date < args.from_date:
 				continue
 
-			logging.info("Exporting highlight {}".format(get_highlight_preview(highlight)))
+			logging.info("Exporting highlight %s" % get_highlight_preview(highlight))
 			formatted_highlight = format_highlight(highlight, book_title)
 			if not args.dry_run:
 				export_to_bear(formatted_highlight)
-			
+
 
 def import_books_data(readwise_token):
 	query_string = {
@@ -89,7 +89,7 @@ def import_highlights(readwise_token, book_id):
 			page += 1
 		else:
 			has_more_highlights = False
-	
+
 	return highlights
 
 
